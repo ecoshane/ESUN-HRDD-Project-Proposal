@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面試簡報：AI 驅動 HRDD 風控專案 (STAR)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 2rem; }
+        :root { --esun-green: #008779; --esun-dark: #0A1C3B; --google-blue: #4285F4; --hrdd-risk: #CC2A2A; }
+        .slide-container { width: 100%; max-width: 900px; aspect-ratio: 16 / 9; background-color: white; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+        .slide { padding: 3rem 4rem; flex-grow: 1; display: none; flex-direction: column; justify-content: center; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        .slide.active { display: flex; opacity: 1; z-index: 10; }
+        .slide-header { display: flex; align-items: center; margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 800; color: var(--esun-green); }
+        .slide-header i { margin-right: 0.75rem; font-size: 1.8rem; }
+        .slide-title { font-size: 2rem; font-weight: 700; color: var(--esun-dark); margin-bottom: 2rem; }
+        .slide-content { font-size: 1rem; color: #374151; line-height: 1.7; flex-grow: 1; }
+        .slide-content ul { list-style: none; padding-left: 0; }
+        .slide-content li { position: relative; padding-left: 1.75rem; margin-bottom: 1rem; }
+        .slide-content li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: var(--esun-green); position: absolute; left: 0; top: 5px; font-size: 1rem; }
+        .highlight { color: var(--esun-green); font-weight: 700; }
+        .risk-highlight { color: var(--hrdd-risk); font-weight: 700; }
+        .action-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; text-align: center; }
+        .action-item { padding: 1rem; background-color: #f3f4f6; border-radius: 8px; border-left: 4px solid var(--esun-green); }
+        .action-item i { font-size: 1.8rem; color: var(--esun-green); margin-bottom: 0.5rem; }
+        .action-item h4 { font-size: 0.9rem; font-weight: 700; color: var(--esun-dark); margin-bottom: 0.3rem; }
+        .action-item p { font-size: 0.8rem; color: #4b5563; }
+        .result-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; text-align: center; }
+        .result-item { padding: 1.5rem; background-color: #f0fdf4; border-radius: 8px; border: 1px solid var(--esun-green); }
+        .result-value { font-size: 2.5rem; font-weight: 800; color: var(--esun-green); margin-bottom: 0.5rem; }
+        .result-label { font-size: 1rem; font-weight: 600; color: var(--esun-dark); }
+        .slide-nav { position: absolute; bottom: 1.5rem; right: 1.5rem; display: flex; gap: 0.5rem; z-index: 20; }
+        .nav-button { background-color: rgba(0, 0, 0, 0.3); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: background-color 0.2s ease; }
+        .nav-button:hover { background-color: rgba(0, 0, 0, 0.5); }
+        .slide-counter { position: absolute; bottom: 1.5rem; left: 1.5rem; font-size: 0.8rem; color: #6b7280; background-color: rgba(255, 255, 255, 0.7); padding: 0.25rem 0.5rem; border-radius: 4px; z-index: 20; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+
+        <!-- Slide 1: Introduction -->
+        <div class="slide active" id="slide-1">
+             <div class="slide-header"><i class="fas fa-briefcase"></i>STAR 原則：專案經驗分享</div>
+             <h2 class="slide-title">AI 驅動 HRDD 風控平台建置專案</h2>
+            <div class="slide-content">
+                <p>分享我如何運用 Google Cloud 技術，主導開發一套自動化人權風險監控系統，以強化永續金融的風險管理能力。</p>
+                 <p class="mt-4 text-sm text-gray-500">應徵職位：永續金融企劃人員 | 報告人：[您的姓名]</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Situation (S) -->
+        <div class="slide" id="slide-2">
+            <div class="slide-header"><i class="fas fa-map-signs"></i>情境 (Situation)</div>
+            <h2 class="slide-title">人權風險監控滯後，曝險巨大</h2>
+            <div class="slide-content">
+                <ul>
+                    <li>當時機構雖推行 SLL，但對客戶的<strong class="risk-highlight">人權風險 (HRDD)</strong> 評估依賴<strong class="risk-highlight">季度人工報告</strong>，反應遲緩。</li>
+                    <li>國際<strong class="risk-highlight">CSDDD 法規趨勢</strong>要求更即時、深入的盡職調查，現有流程難以滿足。</li>
+                    <li>無法即時發現供應鏈<strong class="risk-highlight">強迫勞動</strong>等事件，使銀行面臨<strong class="risk-highlight">聲譽與違約雙重風險</strong>。</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: Task (T) -->
+        <div class="slide" id="slide-3">
+             <div class="slide-header"><i class="fas fa-bullseye"></i>任務 (Task)</div>
+             <h2 class="slide-title">打造實時 HRDD 預警，連接 SLL 契約</h2>
+             <div class="slide-content">
+                <p>我的核心任務是：</p>
+                <ul>
+                    <li><strong class="highlight">設計並主導</strong>開發一套能整合 E/S+/S- 數據的<strong class="highlight">自動化 HRDD 風控平台</strong>。</li>
+                    <li>目標將重大風險事件的預警時間從<strong class="highlight">數週縮短至 48 小時內</strong>。</li>
+                    <li>確保系統能<strong class="highlight">自動標記</strong>高風險客戶，並與 SLL 契約的人權紅線條款執行<strong class="highlight">直接連動</strong>。</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4: Action (A) -->
+        <div class="slide" id="slide-4">
+             <div class="slide-header"><i class="fas fa-cogs"></i>行動 (Action)</div>
+             <h2 class="slide-title">運用 Google Cloud 技術，三步實現智能風控</h2>
+             <div class="slide-content">
+                <p>我採取的關鍵行動包括：</p>
+                <div class="action-grid">
+                    <div class="action-item">
+                        <i class="fas fa-database"></i>
+                        <h4>1. 數據整合治理</h4>
+                        <p>定義統一數據模型，透過 <strong class="highlight">Apigee</strong> 安全接入客戶數據至 <strong class="highlight">BigQuery</strong>。</p>
+                    </div>
+                     <div class="action-item">
+                        <i class="fas fa-brain"></i>
+                        <h4>2. AI 風險偵測</h4>
+                        <p>與團隊利用 <strong class="highlight">Vertex AI</strong> 訓練 NLP 模型，實時掃描輿情，自動生成 <strong class="risk-highlight">HRDD 風險分數</strong>。</p>
+                    </div>
+                     <div class="action-item">
+                        <i class="fas fa-bell"></i>
+                        <h4>3. 自動化預警</h4>
+                        <p>設計 <strong class="highlight">Cloud Functions</strong> 邏輯，當分數觸及紅線時，自動預警並於 <strong class="highlight">Looker</strong> 標記狀態。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Result (R) -->
+        <div class="slide" id="slide-5">
+             <div class="slide-header"><i class="fas fa-chart-line"></i>結果 (Result)</div>
+             <h2 class="slide-title">顯著提升風險管理效率與合規性</h2>
+             <div class="slide-content">
+                 <p>專案成功達成預期目標，具體成果如下：</p>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-value">~85% <i class="fas fa-arrow-down text-sm"></i></div>
+                        <div class="result-label">HRDD 風險預警時間縮短</div>
+                    </div>
+                     <div class="result-item">
+                        <div class="result-value">95% <i class="fas fa-check-circle text-sm"></i></div>
+                        <div class="result-label">人權條款自動監控率</div>
+                    </div>
+                </div>
+                 <ul class="mt-6">
+                    <li><strong class="highlight">風險控制：</strong> 大幅降低因資訊滯後導致的風險曝險窗口。</li>
+                     <li><strong class="highlight">效率提升：</strong> 顯著減少人工審核成本與操作風險。</li>
+                    <li><strong class="highlight">戰略價值：</strong> 強化了機構的永續風控能力，符合國際 HRDD 趨勢。</li>
+                 </ul>
+            </div>
+        </div>
+
+        <!-- Slide Navigation Buttons -->
+        <div class="slide-nav">
+            <button class="nav-button" id="prev-slide"><i class="fas fa-chevron-left"></i></button>
+            <button class="nav-button" id="next-slide"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <!-- Slide Counter -->
+        <div class="slide-counter" id="slide-counter">1 / 5</div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevButton = document.getElementById('prev-slide');
+        const nextButton = document.getElementById('next-slide');
+        const slideCounter = document.getElementById('slide-counter');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+            slideCounter.textContent = `${index + 1} / ${totalSlides}`;
+            prevButton.disabled = index === 0;
+            nextButton.disabled = index === totalSlides - 1;
+            prevButton.style.opacity = index === 0 ? '0.5' : '1';
+            nextButton.style.opacity = index === totalSlides - 1 ? '0.5' : '1';
+        }
+
+        prevButton.addEventListener('click', () => { if (currentSlide > 0) { currentSlide--; showSlide(currentSlide); } });
+        nextButton.addEventListener('click', () => { if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(currentSlide); } });
+        document.addEventListener('keydown', (e) => {
+             if (e.key === 'ArrowLeft' && currentSlide > 0) { currentSlide--; showSlide(currentSlide); }
+             else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) { currentSlide++; showSlide(currentSlide); }
+        });
+        showSlide(currentSlide); // Initialize
+    </script>
+</body>
+</html>
